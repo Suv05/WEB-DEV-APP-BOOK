@@ -1,0 +1,223 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    font-family: 'Great Vibes', cursive, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    background-color: #eaf6f6;
+    text-align: center;
+}
+
+.myself {
+
+    position: absolute;
+    color: #66bfbf;
+    font-size: 4rem;
+    bottom: 725px;
+    top: 170px;
+    left: 610px;
+
+
+}
+
+.under {
+    text-decoration: underline;
+
+}
+
+.myh2 {
+    position: absolute;
+    font-family: 'Cantarell', sans-serif;
+    font-size: 25px;
+    color: #66bfbf;
+    left: 788px;
+    top: 245px;
+}
+
+.mywebimage {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0px auto 10px auto;
+
+
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.myimage {
+    width: 13rem;
+    margin: 30px auto 20px auto;
+}
+
+h2 {
+    font-family: 'Cantarell', sans-serif;
+    font-size: 30px;
+    color: #66bfbf;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.mycontent {
+    font-size: 18px;
+    font-family: 'Cantarell', sans-serif;
+    text-align: center;
+    color: #40514e;
+    margin: auto;
+    font-weight: bold;
+    width: 30%;
+
+}
+
+hr {
+    border: dotted #446868 4px;
+    height: 0;
+    width: 4%;
+    margin: 100px auto;
+
+}
+
+.skill-row {
+    width: 50%;
+    margin: auto;
+    text-align: left;
+    line-height: 25px;
+    font-family: 'Cantarell', sans-serif;
+}
+
+h3 {
+    color: #11999e;
+    font-family: 'Cantarell', sans-serif;
+    font-size: 20px;
+    margin: 30px auto 30px auto;
+
+
+}
+
+.mydesign {
+    width: 19%;
+    float: right;
+}
+
+.mywings {
+    width: 20%;
+    float: left;
+    margin-right: 30px;
+
+
+}
+
+
+.gettuoch {
+    text-align: center;
+
+}
+
+.fotter {
+    font-family: 'Cantarell', sans-serif;
+    margin: auto;
+    text-align: center;
+    width: 40%;
+    margin-bottom: 50px;
+}
+
+.btn {
+    background: #738d9e;
+    background-image: -webkit-linear-gradient(top, #738d9e, #50ade6);
+    background-image: -moz-linear-gradient(top, #738d9e, #50ade6);
+    background-image: -ms-linear-gradient(top, #738d9e, #50ade6);
+    background-image: -o-linear-gradient(top, #738d9e, #50ade6);
+    background-image: linear-gradient(to bottom, #738d9e, #50ade6);
+    -webkit-border-radius: 13;
+    -moz-border-radius: 13;
+    border-radius: 13px;
+    font-family: Courier New;
+    color: #ffffff;
+    font-size: 17px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    margin: 30px auto;
+}
+
+.btn:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+.linking {
+    width: 100%;
+    background-color: #66bfbf;
+    padding: 50px 0 20px;
+}
+
+a {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a:hover {
+    background-color: #89e73c;
+    color: #fff;
+}
+
+.copyright {
+    color: #eaf6f6;
+    margin-top: 30px;
+}
+
+/* Your existing CSS */
+
+/* Media query for screens with a maximum width of 412px (for smaller devices like mobile phones) */
+@media (max-width: 412px) {
+    body {
+        font-size: 14px;
+        /* Adjust font size for smaller screens */
+    }
+
+    .myself {
+        font-size: 3rem;
+        position: absolute;
+        left: 92px;
+        top: 30px;
+        /* Adjust the title font size */
+    }
+
+    .mycontent {
+        font-size: 14px;
+        /* Adjust content font size */
+        width: 90%;
+        /* Increase width for better readability */
+    }
+
+    .skill-row {
+        width: 90%;
+        /* Increase width for better layout */
+    }
+
+    .mydesign,
+    .mywings {
+        width: 50%;
+        /* Adjust skill icon sizes */
+    }
+
+    .myh2 {
+        position: relative;
+        left: 85px;
+        top: -160px;
+    }
+}
