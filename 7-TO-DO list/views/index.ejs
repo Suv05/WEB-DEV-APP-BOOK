@@ -11,16 +11,21 @@
 
         <div class="box">
 
-            <% for(let i=0;i<newtask.length;i++){ %>
+            <% newtask.forEach(function(i){ %>
+                <form action="/delete" method="post">
 
-                <div class="item">
-                    <input type="checkbox">
-                    <p>
-                        <%= newtask[i] %>
-                    </p>
-                </div>
+                    <div class="item">
+                        <input type="checkbox" name="checkbox" onChange="this.form.submit()">
+                        <p>
+                            <%= i.name %>
+                        </p>
+                    </div>
 
-                <% } %>
+                </form>
+
+                <% }) %>
+
+
 
                     <form class="item" action=<%=actionValue %> method="post">
                         <input type="text" name="task" placeholder="Enter Task" autocomplete="off">
@@ -34,4 +39,4 @@
 
         <script type="module" src="index.js"></script>
 
-<%- include('footer') -%>
+        <%- include('footer') -%>
