@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
 const Item = require('./itemModel'); // Import the Item model
-
+const List = require('./listmodel');//Importing list model
 
 const app = express();
 
@@ -17,6 +17,7 @@ app.set('view engine', 'ejs');
 //mongoose init
 main().catch(err => console.log(err));
 
+//intialization of items in to database
 async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/todo-list');
 
@@ -27,14 +28,12 @@ async function main() {
     const item3 = new Item({ name: 'Fuck' });
 
     const defaultItem = [item1, item2, item3];
-
-
-
 }
 
 
 
-let workItems = [];
+
+
 
 
 //get request to home router...
@@ -73,19 +72,37 @@ app.post('/', (req, res) => {
 
 })
 
-//post request to delete task to /delete router
-app.post('/', (req, res) => {
 
-    console.log(req.body.checkbox);
+
+
+
+
+//post request to delete task to /delete router
+app.post('/delete', (req, res) => {
+
+    let checkedItem = req.body.checkbox;
+    async function removeDocument() {
+        try {
+            await Item.deleteOne({ _id: checkedItem });
+            console.log('Document removed successfully');
+            res.redirect('/');
+        } catch (err) {
+            console.error('Error:', err);
+            res.redirect('/');
+        }
+    }
+
+    removeDocument();
+
 })
 
 
-//post request to work router
 
+//post request to work router
+let workItems= [];
 app.post('/work', (req, res) => {
     let workitem = req.body.task;
     workItems.push(workitem);
-
 
     res.redirect('/work');
 });
@@ -93,19 +110,47 @@ app.post('/work', (req, res) => {
 
 
 //get request to work router
-app.get('/work', (req, res) => {
-    res.render('index', { currentday: "Work List", newtask: workItems, actionValue: "/work" })
+app.get('/:customListName', (req, res) => {
+    const customListName = req.params.customListName;
 
-});
+
+    const list=new List({
+        name:customListName,
+        items:defaultItem
+    })
+
+    list.save();
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 app.get('/about', (req, res) => {
     res.render('about');
 
 });
-
-
-
 
 
 
