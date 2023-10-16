@@ -2,7 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
-const Item = require('./itemModel'); // Import the Item model
+mongoose.connect('mongodb://127.0.0.1:27017/todo-list');
+
+const itemModel = require('./itemModel');
+const Item = itemModel.Item; // The Mongoose model
 const List = require('./listmodel');//Importing list model
 
 const app = express();
@@ -14,25 +17,14 @@ app.use(express.static('public'));
 //ejs init
 app.set('view engine', 'ejs');
 
-//mongoose init
-main().catch(err => console.log(err));
+
 
 //intialization of items in to database
-async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/todo-list');
+const item1 = new Item({ name: 'Silence' });
+const item2 = new Item({ name: 'Dance' });
+const item3 = new Item({ name: 'Fuck' });
 
-    // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-
-    const item1 = new Item({ name: 'Silence' });
-    const item2 = new Item({ name: 'Dance' });
-    const item3 = new Item({ name: 'Fuck' });
-
-    const defaultItem = [item1, item2, item3];
-}
-
-
-
-
+const defaultItem = [item1, item2, item3];
 
 
 
@@ -51,7 +43,7 @@ app.get('/', (req, res) => {
 
                 res.redirect('/');
             } else {
-                res.render('index', { currentday: "Today", newtask: foundItems, actionValue: "/" });
+                res.render('list', { currentday: "Today", newtask: foundItems, actionValue: "/" });
             }
 
         }).catch(err => {
@@ -99,7 +91,7 @@ app.post('/delete', (req, res) => {
 
 
 //post request to work router
-let workItems= [];
+let workItems = [];
 app.post('/work', (req, res) => {
     let workitem = req.body.task;
     workItems.push(workitem);
@@ -113,13 +105,28 @@ app.post('/work', (req, res) => {
 app.get('/:customListName', (req, res) => {
     const customListName = req.params.customListName;
 
+    List.findOne({ name: customListName })
+        .populate('items') // Populate the 'items' field
+        .exec()
+        .then(document => {
+            if (!document) {
+                // No document found, so create a new one
+                const list = new List({
+                    name: customListName,
+                    items: defaultItem
+                });
 
-    const list=new List({
-        name:customListName,
-        items:defaultItem
-    })
+                list.save();
+                res.redirect(`/${customListName}`);
+            } else {
+                // Document found, show an existing list with populated items
+                res.render('list', { currentday: document.name, newtask: document.items, actionValue:`/${customListName}`});
+            }
+        })
+        .catch(err => {
+            console.error('Error:', err);
+        });
 
-    list.save();
 })
 
 

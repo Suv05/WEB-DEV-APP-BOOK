@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
-    name: String
-});
+    name: String,
+})
 
 
 const Item = mongoose.model('Item', itemSchema);
 
 
-module.exports = Item;
-module.exports=itemSchema;
+module.exports = {
+    Item: Item,
+    itemSchema: itemSchema,
+};

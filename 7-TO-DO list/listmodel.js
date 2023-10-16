@@ -4,10 +4,10 @@ const itemSchema = require('./itemModel');
 
 const listSchema = new mongoose.Schema({
     name: String,
-    item: [itemSchema]
+    items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }]
 
 });
 
 const List = mongoose.model('List', listSchema);
 
-module.exports=List;
+module.exports = List;
