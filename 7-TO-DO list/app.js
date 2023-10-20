@@ -56,11 +56,22 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
 
     let itemName = req.body.task;
+    let listName = req.body.list;
 
     const item = new Item({ name: itemName });
 
-    item.save();
-    res.redirect('/');
+    if (listName === "Today") {
+        item.save();
+        res.redirect('/');
+    } else {
+        List.findOne({ name: listName })
+            .then(foundList => {
+                foundList.items.push(item);
+                foundList.save();
+                res.redirect('/' + listName)
+            })
+    }
+
 
 })
 
@@ -90,14 +101,7 @@ app.post('/delete', (req, res) => {
 
 
 
-//post request to work router
-let workItems = [];
-app.post('/work', (req, res) => {
-    let workitem = req.body.task;
-    workItems.push(workitem);
 
-    res.redirect('/work');
-});
 
 
 
@@ -120,7 +124,7 @@ app.get('/:customListName', (req, res) => {
                 res.redirect(`/${customListName}`);
             } else {
                 // Document found, show an existing list with populated items
-                res.render('list', { currentday: document.name, newtask: document.items, actionValue:`/${customListName}`});
+                res.render('list', { currentday: document.name, newtask: document.items, actionValue: `/${customListName}` });
             }
         })
         .catch(err => {
@@ -158,7 +162,6 @@ app.get('/about', (req, res) => {
     res.render('about');
 
 });
-
 
 
 

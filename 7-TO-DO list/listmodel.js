@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const itemSchema = require('./itemModel');
-
+const itemModel = require('./itemModel');
+const Item = itemModel.Item; 
 
 const listSchema = new mongoose.Schema({
     name: String,
