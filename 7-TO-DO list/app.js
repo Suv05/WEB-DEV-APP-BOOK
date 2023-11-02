@@ -76,10 +76,6 @@ app.post('/', (req, res) => {
 })
 
 
-
-
-
-
 //post request to delete task to /delete router
 app.post('/delete', (req, res) => {
 
@@ -98,11 +94,6 @@ app.post('/delete', (req, res) => {
     removeDocument();
 
 })
-
-
-
-
-
 
 
 //get request to work router
@@ -134,36 +125,10 @@ app.get('/:customListName', (req, res) => {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.get('/about', (req, res) => {
     res.render('about');
 
 });
-
-
 
 app.listen(3000, () =>
     console.log("port is running in 3000 port")
