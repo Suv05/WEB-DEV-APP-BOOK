@@ -1,0 +1,14 @@
+.myStyle{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: oblique;
+    font-size: 1.5rem;
+    color: gold;
+    font-weight: 200;
+    text-transform: capitalize;
+}
+.container{
+    border-radius: 2rem;
+    border: 1px dotted rgb(244, 152, 32);
+    background-color: blanchedalmond;
+    height: 60vh;
+}
