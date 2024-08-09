@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import tasksRouter from "./routes/tasks.route.js";
 import createConnection from "./DB/connect.js";
+import { errorHandler } from "./Middleware/errorHandeler.js";
+import NotFoundError from "./Error/NotFoundError.js";
 
 dotenv.config();
 
@@ -16,6 +18,13 @@ app.use(express.urlencoded({ extended: true }));
 // Use the tasks router
 app.use("/api/v1", tasksRouter);
 
+// Handle 404 errors
+app.use((req, res, next) => {
+  next(new NotFoundError("The requested resource was not found"));
+});
+
+//error handeler middleware
+app.use(errorHandler);
 
 //connncetion to database
 createConnection(process.env.MONGO_URI)
