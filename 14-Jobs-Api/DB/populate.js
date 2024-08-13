@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import ProductList from "../models/Product.model.js";
-import items from "./products.json" assert { type: "json" };
+import JobList from "../models/Job.model";
+import items from "./jobs.json" assert { type: "json" };
 
 dotenv.config();
 
@@ -20,10 +20,10 @@ const insertCollection = async (uri) => {
     );
 
     // Clean existing data from the database
-    await ProductList.deleteMany({});
+    await JobList.deleteMany({});
 
     // Insert data to the database
-    await ProductList.insertMany(items);
+    await JobList.insertMany(items);
 
     console.log("Successfully inserted");
   } catch (error) {

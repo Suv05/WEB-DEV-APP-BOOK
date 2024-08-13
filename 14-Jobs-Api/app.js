@@ -1,9 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
-import productsRouter from "./routes/products.route.js";
-import createConnection from "./DB/connect.js";
+
+//router setup
+import authRouter from "./routes/auth.route.js";
+import jobsRouter from "./routes/jobs.route.js";
+
+//error handeling
 import { errorHandler } from "./Middleware/errorHandeler.js";
 import NotFoundError from "./Error/NotFoundError.js";
+
+//connection setup
+import createConnection from "./DB/connect.js";
 
 dotenv.config();
 
@@ -15,8 +22,9 @@ app.use(express.json());
 // To parse URL-encoded data (e.g., form submissions)
 app.use(express.urlencoded({ extended: true }));
 
-// Use the products router
-app.use("/api/v1", productsRouter);
+// Use the jobs  and auth router
+app.use("/api/v1/jobs", jobsRouter);
+app.use("/api/v1/auth", authRouter);
 
 // Handle 404 errors
 app.use((req, res, next) => {
