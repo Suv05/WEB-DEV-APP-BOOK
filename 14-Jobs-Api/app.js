@@ -1,5 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
+import 'express-async-errors';
+
 
 //router setup
 import authRouter from "./routes/auth.route.js";

@@ -1,5 +1,6 @@
-import User from "../models/User.model.js";
+import "express-async-errors";
 import { StatusCodes } from "http-status-codes";
+import User from "../models/User.model.js";
 import AppError from "../Errors/AppError.js";
 import UnauthError from "../Errors/UnauthError.js";
 
