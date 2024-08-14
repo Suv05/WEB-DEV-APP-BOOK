@@ -12,6 +12,7 @@ const UserSchema = new Schema({
       value.charAt(0).toUpperCase() + value.slice(1).toLowerCase(),
     minLength: 3,
     maxLength: 25,
+    trim: true,
   },
   email: {
     type: String,
@@ -26,6 +27,7 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "Enter your password"],
     minLength: 6,
+    trim: true,
   },
 });
 
