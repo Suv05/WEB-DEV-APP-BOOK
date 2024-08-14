@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const { Schema, model } = mongoose;
 
@@ -34,6 +35,20 @@ UserSchema.pre("save", async function () {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
+
+UserSchema.methods.createJWT = function () {
+  return jwt.sign(
+    { userID: this._id, name: this.name },
+    process.env.JWT_PASSKEY,
+    { algorithm: "HS256", expiresIn: process.env.JWT_LIFETIME }
+  );
+};
+
+UserSchema.methods.matchPassword = async function (givenPassword) {
+  const isMatch = await bcrypt.compare(givenPassword, this.password);
+
+  return isMatch;
+};
 
 const User = model("User", UserSchema);
 
