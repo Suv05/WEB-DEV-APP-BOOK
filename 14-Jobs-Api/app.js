@@ -7,7 +7,7 @@ import jobsRouter from "./routes/jobs.route.js";
 
 //error handeling
 import { errorHandler } from "./Middleware/errorHandeler.js";
-import NotFoundError from "./Error/NotFoundError.js";
+import NotFoundError from "./Errors/NotFoundError.js";
 
 //connection setup
 import createConnection from "./DB/connect.js";
