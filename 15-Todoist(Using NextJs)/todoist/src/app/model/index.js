@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const { Schema, model } = mongoose;
+const { Schema, model, models } = mongoose;
 
 const taskSchema = new Schema(
   {
@@ -10,6 +10,7 @@ const taskSchema = new Schema(
     description: {
       type: String,
       required: false, // Make it optional if needed
+      default: "No descrption added",
     },
   },
   {
@@ -17,5 +18,5 @@ const taskSchema = new Schema(
   }
 );
 
-const Task = model("Task", taskSchema);
-export default Task;
+const Tasklist = models.Tasklist || model("Tasklist", taskSchema);
+export default Tasklist;
